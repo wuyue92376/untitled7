@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Basic Embedding Gate One</title>
+    <script src="https://172.1.0.102/static/gateone.js"></script>
+    <script>
+      window.onload = function() {
+          // Initialize Gate One:
+
+          GateOne.init({
+              url:'https://172.1.0.102',
+              theme:'solarized',
+              showToolbar:false,
+              autoConnectURL:'ssh://root@10.2.0.24'
+          });
+      }
+    </script>
+  </head>
+  <body>
+<div>Hello lienhua11111111111111111111111</div>
+<!-- Decide where you want to put Gate One -->
+    <div id="gateone_container" style="position: relative; width: 60em; height: 30em;">
+        <div id="gateone"></div>
+    </div>
+  </body>
+
+</html>

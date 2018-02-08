@@ -1,0 +1,47 @@
+{% extends "default.html" %}
+{% block css %}
+    <link href="/static/css/DT_bootstrap.css" rel="stylesheet" media="screen">
+{% endblock %}
+{% block content %}
+    {% for i in item %}
+    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="text-muted bootstrap-admin-box-title">编辑{{ i.Hostname }}</div>
+<form method="post" action="/edithost-{{ i.id }}.html/">
+  <div class="form-group">
+    <label for="exampleInputHostname">Hostname</label>
+    <input type="text" class="form-control" id="exampleInputHostname" placeholder="{{ i.Hostname }}" name="Hostname">
+  </div>
+  <div class="form-group">
+    <label for="exampleIP">IP</label>
+    <input type="text" class="form-control" id="exampleIP" placeholder="{{ i.HostIP }}" name="IP">
+  </div>
+  <div class="form-group">
+    <label for="exampleversion">version</label>
+    <input type="text" class="form-control" id="exampleversion" placeholder="{{ i.version }}" name="version">
+  </div>
+    <div class="form-group">
+    <label>proline</label>
+        <select class="form-control" name="app">
+        <option selected value="idle">idle</option>
+       {% for l in applist %}
+           <option value="{{ l.proline }}">  {{ l.proline }}</option>
+        {% endfor %}
+        </select>
+
+  </div>
+
+
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+                            </div>
+                        </div>
+</div>
+ {% endfor %}
+{% endblock %}
+{% block js %}
+     <script type="text/javascript" src="/static/js/twitter-bootstrap-hover-dropdown.min.js"></script>
+     <script type="text/javascript" src="/static/vendors/datatables/js/jquery.dataTables.min.js"></script>
+     <script type="text/javascript" src="/static/js/DT_bootstrap.js"></script>
+{% endblock %}
