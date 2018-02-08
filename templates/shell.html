@@ -6,6 +6,9 @@
  {% block gateone %}
      {% for i in item %}
      <script>
+
+
+
       window.onload = function() {
           // Initialize Gate One:
           GateOne.init({
@@ -23,7 +26,7 @@
 
     {% for i in item %}
 
-<div>{{ i.Hostname }} {{ i.HostIP }}111111111111111111111111</div>
+<div>{{ i.Hostname }} {{ i.HostIP }}控制台</div>
 <!-- Decide where you want to put Gate One -->
     <div id="gateone_container" style="position: relative; width: 60em; height: 30em;">
         <div id="gateone"></div>
