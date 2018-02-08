@@ -14,5 +14,7 @@ class HostInfo(models.Model):
     Hostname = models.CharField(max_length=30,db_index=True)
     version=models.CharField(max_length=30)
     app = models.ForeignKey(to="appInfo",to_field="id",null=True)
+    admin=models.CharField(max_length=30,null=True)
+    passwd=models.CharField(max_length=60,null=True)
 class appInfo(models.Model):
     proline = models.CharField(max_length=30,db_index=True)
