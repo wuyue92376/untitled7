@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^delhost-(\d+).html',views.delhost),
     url(r'^edithost-*(\d+)*.html',views.edithost),
     url(r'^console',views.console),
-    url(r'ssh',views.host_connect2),
+    url(r'^shell-*(\d+)*.html',views.host_connect),
 ]

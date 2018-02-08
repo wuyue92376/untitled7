@@ -1,0 +1,38 @@
+{% extends "default.html" %}
+{% block css %}
+    <link href="/static/css/DT_bootstrap.css" rel="stylesheet" media="screen">
+
+{% endblock %}
+ {% block gateone %}
+     {% for i in item %}
+     <script>
+      window.onload = function() {
+          // Initialize Gate One:
+          GateOne.init({
+              url:'https://172.1.0.102',
+              theme:'solarized',
+              upn:'test',
+              autoConnectURL:'ssh://{{ i.admin }}@{{ i.HostIP }}'
+          });
+          GateOne.Net.autoConnect();
+      }
+    </script>
+     {% endfor %}
+        {% endblock %}
+{% block content %}
+
+    {% for i in item %}
+
+<div>{{ i.Hostname }} {{ i.HostIP }}111111111111111111111111</div>
+<!-- Decide where you want to put Gate One -->
+    <div id="gateone_container" style="position: relative; width: 60em; height: 30em;">
+        <div id="gateone"></div>
+    </div>
+    {% endfor %}
+{% endblock %}
+{% block js %}
+    <script src="https://172.1.0.102/static/gateone.js"></script>
+     <script type="text/javascript" src="/static/js/twitter-bootstrap-hover-dropdown.min.js"></script>
+     <script type="text/javascript" src="/static/vendors/datatables/js/jquery.dataTables.min.js"></script>
+     <script type="text/javascript" src="/static/js/DT_bootstrap.js"></script>
+{% endblock %}

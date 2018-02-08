@@ -85,5 +85,10 @@ def console(request):
         command1=request.POST['command']
         result= sshconnet.connectssh(hostname='bogon', port='22', username='root', password='Ji@ye2016', command=command1)
         return render(request,'consloe.html',{'i':result})
-def host_connect2(request):
-        return render(request,'sshtest.html')
+def host_connect(request,nid):
+    if request.method=='GET':
+        v = models.HostInfo.objects.filter(id=nid).values('id', 'HostIP', 'Hostname', 'version', 'app__proline','admin','passwd')
+
+
+
+        return render(request,'shell.html',{'item':v})
