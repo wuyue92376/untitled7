@@ -1,20 +1,20 @@
 {% extends "default.html" %}
 {% block css %}
     <link href="/static/css/DT_bootstrap.css" rel="stylesheet" media="screen">
-
 {% endblock %}
  {% block gateone %}
      {% for i in item %}
      <script>
 
-
-
       window.onload = function() {
           // Initialize Gate One:
+
           GateOne.init({
-              url:'https://172.1.0.102',
-              theme:'solarized',
-              upn:'test',
+               auth:{{ auth_info|safe }},
+{#              auth:{{ auth_info }},#}
+               url:'https://172.1.0.102',
+{#              theme:'solarized',#}
+{#              upn:'test',#}
               autoConnectURL:'ssh://{{ i.admin }}@{{ i.HostIP }}'
           });
           GateOne.Net.autoConnect();
@@ -25,8 +25,9 @@
 {% block content %}
 
     {% for i in item %}
-
-<div>{{ i.Hostname }} {{ i.HostIP }}控制台</div>
+<div class="page-header">
+  <h1>控制台-{{ i.Hostname }}<small>{{ i.HostIP }}</small></h1>
+</div>
 <!-- Decide where you want to put Gate One -->
     <div id="gateone_container" style="position: relative; width: 60em; height: 30em;">
         <div id="gateone"></div>
@@ -34,7 +35,7 @@
     {% endfor %}
 {% endblock %}
 {% block js %}
-    <script src="https://172.1.0.102/static/gateone.js"></script>
+{#    <script src="https://172.1.0.102/static/gateone.js"></script>#}
      <script type="text/javascript" src="/static/js/twitter-bootstrap-hover-dropdown.min.js"></script>
      <script type="text/javascript" src="/static/vendors/datatables/js/jquery.dataTables.min.js"></script>
      <script type="text/javascript" src="/static/js/DT_bootstrap.js"></script>
