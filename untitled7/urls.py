@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^edithost-*(\d+)*.html',views.edithost),
     url(r'^console',views.console),
     url(r'^shell-*(\d+)*.html',views.host_connect),
+    url(r'^test',views.celery11),
 ]

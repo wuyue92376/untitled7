@@ -1,7 +1,14 @@
 from django.shortcuts import redirect,render,HttpResponse
 from app1 import models
 from console import sshconnet
+from celery import app
+from time import sleep
+from app1.tasks import add
 
+def celery11(request):
+    y=add.delay(3,4)
+    y=y.get()
+    return HttpResponse(y)
 
 # Create your views here.
 def login(request):
@@ -80,7 +87,9 @@ def edithost(request,nid):
         return redirect('/hostlist/')
 def console(request):
     if request.method=='GET':
-        return render(request,'consloe.html')
+        iplist = models.HostInfo.objects.all().values("id","HostIP")
+        print(iplist)
+        return render(request,'consloe.html',{"iplist":iplist})
     elif request.method=='POST':
         command1=request.POST['command']
         result= sshconnet.connectssh(hostname='bogon', port='22', username='root', password='Ji@ye2016', command=command1)
@@ -111,6 +120,7 @@ def host_connect(request,nid):
     if request.method=='GET':
         v = models.HostInfo.objects.filter(id=nid).values('id', 'HostIP', 'Hostname', 'version', 'app__proline','admin','passwd')
         return render(request,'shell.html',{'item':v,'auth_info':valid_json_auth_info})
+
 
 
 # def generate_gate_one_auth_obj(request):

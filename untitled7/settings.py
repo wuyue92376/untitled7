@@ -12,6 +12,17 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import djcelery
+djcelery.setup_loader()
+BROKER_URL= 'amqp://guest@172.1.0.102//'
+CELERY_RESULT_BACKEND = 'amqp://guest@172.1.0.102//'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_IMPORTS = (
+#     'reports.tasks',
+#     'some_app.some_module',
+# )
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +49,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+    'kombu.transport.pyamqp',
+    'djcelery',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +118,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS= (
     os.path.join(BASE_DIR,'static'),
 )
+#celery 配置
+# djcelery.setup_loader()
+
+#CELERY_RESULT_BACKEND = 'amqp://guest@localhost//'
