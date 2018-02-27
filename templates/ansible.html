@@ -1,0 +1,52 @@
+{% extends "default.html" %}
+
+        {% block css %}
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+        {% endblock %}
+                    {% block content %}
+                        <div class="row">
+                        <div class="form-group">
+                           <label class="col-sm-3 control-label">客资类型：</label>
+                            <div class="col-sm-4">
+                                <select id="usertype" name="usertype" class="selectpicker show-tick form-control" multiple data-live-search="false">
+                                    {% for v in iplist %}
+                                     <option value={{ v.id }}>{{ v.HostIP }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                          </div>
+
+                            <div class="panel-heading">
+                                <div class="text-muted bootstrap-admin-box-title">主机列表</div>
+                                 <div class="bootstrap-admin-panel-content">
+                                  <form method="POST" action="/ansible/"><input type="text" style="width: 80%"  name="command"> <input type="submit"></form>
+                                    <textarea  style="width: 80%" class="form-control" rows="2">{{ i }}</textarea>
+
+                        </div>
+
+                    </div>
+                </div>
+                        </div>
+     {% endblock %}
+            <div class="row">
+                <hr>
+                <footer role="contentinfo">
+                    <p>&copy; 2013 <a href="#" target="_blank">Boot3Admin</a>-More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                </footer>
+            </div>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        {% block js %}
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+            <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+
+        {% endblock %}
+        </div>
+    </body>
+</html>

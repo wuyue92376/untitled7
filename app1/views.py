@@ -4,7 +4,7 @@ from console import sshconnet
 from celery import app
 from time import sleep
 from app1.tasks import add
-
+import json
 def celery11(request):
     y=add.delay(3,4)
     y=y.get()
@@ -120,8 +120,18 @@ def host_connect(request,nid):
     if request.method=='GET':
         v = models.HostInfo.objects.filter(id=nid).values('id', 'HostIP', 'Hostname', 'version', 'app__proline','admin','passwd')
         return render(request,'shell.html',{'item':v,'auth_info':valid_json_auth_info})
-
-
+def run_ansible(request):
+    from until.ansible_api import Ansible_api
+    if request.method=='GET':
+        iplist = models.HostInfo.objects.all().values("id","HostIP")
+        print(iplist)
+        return render(request,'ansible.html',{"iplist":iplist})
+    elif request.method=='POST':
+        command1=request.POST['command']
+        f=Ansible_api(["172.1.0.102"])
+        result=f.run_adhoc("file","path=/tmp/2122 state=directory")
+        #result=json.dumps(result,indent=4)
+        return render(request,'ansible.html',{'i':result})
 
 # def generate_gate_one_auth_obj(request):
 #     import time, hmac, hashlib, json

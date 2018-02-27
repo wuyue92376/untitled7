@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^console',views.console),
     url(r'^shell-*(\d+)*.html',views.host_connect),
     url(r'^test',views.celery11),
+    url(r'^ansible',views.run_ansible),
 ]

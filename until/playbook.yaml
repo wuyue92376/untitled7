@@ -1,0 +1,6 @@
+---
+- hosts: test
+  remote_user: root
+  tasks:
+   - name: test yaml
+     file: path=/tmp/1111aaa state=directory 
