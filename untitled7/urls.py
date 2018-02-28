@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^shell-*(\d+)*.html',views.host_connect),
     url(r'^test',views.celery11),
     url(r'^ansible',views.run_ansible),
+    url(r'^ajax.html',views.ajax_test),
+    url(r'^ajax_submit',views.ajax_submit),
 ]

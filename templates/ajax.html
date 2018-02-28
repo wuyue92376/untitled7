@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input id="ajax_submit" type="submit" value="tijiao" name="ajaxtext">
+<textarea id="result"></textarea>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+           $('#ajax_submit').click(function () {
+            $.ajax({
+                url: "/ajax_submit",
+                type: 'POST',
+                data: {'qqmodel':"file",'args':"path=/tmp/1212 state=directory"},
+                {#data: {'ansible_modes': "file"},#}
+                datatype: 'json',
+                success: function(data){
+                    var obj=JSON.parse(data)
+                    console.log(obj)
+                    if(obj.status){
+                            $('#result').val(obj.status)
+                    }
+
+                    {#alert(data)#}
+                }
+
+            })
+       })
+
+
+    </script>
+</body>
+</html>
