@@ -6,25 +6,51 @@
 
 </head>
 <body>
-<input id="ajax_submit" type="submit" value="tijiao" name="ajaxtext">
+<form id="form" enctype="multipart/form-data">
+    <input id="upfile" type="file" name="attr">
+    <input id="attr_submit" type="button" onclick="test()" value="upload">
+</form>
+
+<input id="ajax_submit"  type="button" value="tijiao" name="ajaxtext">
 <textarea id="result"></textarea>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
 <script>
-           $('#ajax_submit').click(function () {
+  function test(){
+      var form = new FormData();
+      var upfile = $('#upfile')[0].files[0];
+      form.append('file',upfile);
+      $.ajax({
+            url: "/upload",
+            type: "POST",
+            data: form,
+            processData: false,
+            cache: false,
+            contentType: false,
+            datatype: 'json',
+            success:function (data) {
+                var obj=JSON.parse(data)
+                console.log(obj)
+                alert("ok");
+
+            }
+        })
+
+    }
+
+
+
+    $('#ajax_submit').click(function () {
             $.ajax({
                 url: "/ajax_submit",
                 type: 'POST',
                 data: {'qqmodel':"file",'args':"path=/tmp/1212 state=directory"},
-                {#data: {'ansible_modes': "file"},#}
                 datatype: 'json',
-                success: function(data){
-                    var obj=JSON.parse(data)
+                success: function(data1){
+                    var obj=JSON.parse(data1)
                     console.log(obj)
                     if(obj.status){
                             $('#result').val(obj.status)
                     }
-
-                    {#alert(data)#}
                 }
 
             })

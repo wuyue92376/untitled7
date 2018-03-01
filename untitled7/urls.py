@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^ansible',views.run_ansible),
     url(r'^ajax.html',views.ajax_test),
     url(r'^ajax_submit',views.ajax_submit),
+    url(r'^upload',views.upload),
 ]

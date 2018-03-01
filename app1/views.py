@@ -4,7 +4,7 @@ from console import sshconnet
 from celery import app
 from time import sleep
 from app1.tasks import add
-import json
+import json,os
 from until.ansible_api import Ansible_api
 def celery11(request):
     y=add.delay(3,4)
@@ -150,6 +150,23 @@ def run_ansible(request):
         result=f.run_adhoc("file","path=/tmp/2122 state=directory")
         #result=json.dumps(result,indent=4)
         return render(request,'ansible.html',{'i':result})
+def upload(request):
+    if request.method=="POST":
+        ret = {'status': None, 'error': None, 'data': None}
+        try:
+            fileobj=request.FILES.get('file')
+            f=open(os.path.join('upload',fileobj.name),'wb')
+            for line in fileobj.chunks():
+                f.write(line)
+            f.close()
+            ret['status']=str('ok')
+        except Exception as e:
+            ret['error']=repr(e)
+
+        return HttpResponse(json.dumps(ret))
+
+
+
 
 # def generate_gate_one_auth_obj(request):
 #     import time, hmac, hashlib, json
